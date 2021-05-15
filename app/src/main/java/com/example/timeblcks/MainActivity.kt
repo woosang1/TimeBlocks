@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         viewPager = findViewById(R.id.vp_pager);
 
-        viewPagerAdapter = ViewPagerAdapter()
+        viewPagerAdapter = ViewPagerAdapter(applicationContext)
         viewPager.adapter = viewPagerAdapter
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
