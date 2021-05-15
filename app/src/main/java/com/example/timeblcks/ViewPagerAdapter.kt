@@ -17,12 +17,12 @@ class ViewPagerAdapter(context : Context): RecyclerView.Adapter<ViewPagerAdapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder =
         PagerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.activity_calendar, parent, false))
 
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int = 12
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         calendarAdapter = CalendarAdapter()
 
-        val myLayoutManager = GridLayoutManager(context, 7)
+        val myLayoutManager = GridLayoutManager(context, 6)
         holder.recyclerView.layoutManager = myLayoutManager
 
         if (position == 0){
