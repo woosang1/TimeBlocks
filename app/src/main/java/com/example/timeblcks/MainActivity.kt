@@ -16,13 +16,14 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mouthTextView : TextView
     lateinit var yearTextView : TextView
+    val todayCalendar: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewPager = findViewById(R.id.vp_pager);
 
-        viewPagerAdapter = ViewPagerAdapter(applicationContext)
+        viewPagerAdapter = ViewPagerAdapter(applicationContext, todayCalendar)
         viewPager.adapter = viewPagerAdapter
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 getToday(position)
+//                viewPagerAdapter.notifyDataSetChanged()
 //                if (position == 0) {
 //                    // you are on the first page
 //

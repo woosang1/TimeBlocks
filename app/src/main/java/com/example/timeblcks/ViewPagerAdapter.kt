@@ -2,16 +2,20 @@ package com.example.timeblcks
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
+import java.util.logging.Logger
 
-class ViewPagerAdapter(context : Context): RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
+class ViewPagerAdapter(context : Context, getCalendar: Calendar): RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
 
 //    lateinit var recyclerView: RecyclerView
     lateinit var calendarAdapter: CalendarAdapter
+    var calendar  = getCalendar
     val context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder =
@@ -20,20 +24,44 @@ class ViewPagerAdapter(context : Context): RecyclerView.Adapter<ViewPagerAdapter
     override fun getItemCount(): Int = 12
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        calendarAdapter = CalendarAdapter()
+        calendarAdapter = CalendarAdapter(calendar)
 
         val myLayoutManager = GridLayoutManager(context, 6)
         holder.recyclerView.layoutManager = myLayoutManager
 
-        if (position == 0){
-            holder.recyclerView.setBackgroundColor(Color.BLUE)
-        }
-        else if(position == 1){
-            holder.recyclerView.setBackgroundColor(Color.RED)
-        }
-        else{
-            holder.recyclerView.setBackgroundColor(Color.GREEN)
-        }
+//        val date = position % 7
+//        // Sun
+//        if (date == 0){
+//            holder.recyclerView.setBackgroundColor(Color.BLUE)
+//
+////            calendar.get(Calendar.)
+//
+//        }
+//        // Mon
+//        else if(date == 1){
+//            holder.recyclerView.setBackgroundColor(Color.RED)
+//        }
+//
+//        // Tue
+//        else if (date == 2){
+//
+//        }
+//
+//        // Wed
+//        else if (date == 3){
+//
+//        }
+//
+//        // Fri
+//        else if (date == 4){
+//
+//        }
+//
+//        // Sat
+//
+//        else{
+//            holder.recyclerView.setBackgroundColor(Color.GREEN)
+//        }
         holder.recyclerView.adapter = calendarAdapter
 
 //        holder.bind(mList[position])
