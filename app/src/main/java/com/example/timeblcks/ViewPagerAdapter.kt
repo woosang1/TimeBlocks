@@ -1,5 +1,6 @@
 package com.example.timeblcks
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,15 @@ class ViewPagerAdapter(): RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
 
         calendarAdapter = CalendarAdapter()
+        if (position == 0){
+            holder.recyclerView.setBackgroundColor(Color.BLUE)
+        }
+        else if(position == 1){
+            holder.recyclerView.setBackgroundColor(Color.RED)
+        }
+        else{
+            holder.recyclerView.setBackgroundColor(Color.GREEN)
+        }
         holder.recyclerView.adapter = calendarAdapter
 
 //        holder.bind(mList[position])
