@@ -22,7 +22,7 @@ class ViewPagerAdapter(context : Context): RecyclerView.Adapter<ViewPagerAdapter
     override fun getItemCount(): Int = 12
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        calendarAdapter = CalendarAdapter(position)
+        calendarAdapter = CalendarAdapter(context,position)
 
         val myLayoutManager = GridLayoutManager(context, 7)
         holder.recyclerView.layoutManager = myLayoutManager

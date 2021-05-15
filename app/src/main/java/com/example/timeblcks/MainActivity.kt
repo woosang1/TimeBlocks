@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         viewPager = findViewById(R.id.vp_pager);
 
-        viewPagerAdapter = ViewPagerAdapter(applicationContext)
+        viewPagerAdapter = ViewPagerAdapter(context = this@MainActivity)
         viewPager.adapter = viewPagerAdapter
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         mouthTextView = findViewById(R.id.tv_month)
