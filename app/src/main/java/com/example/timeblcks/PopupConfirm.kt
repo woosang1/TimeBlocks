@@ -2,6 +2,7 @@ package com.example.timeblcks
 
 import android.app.Dialog
 import android.content.Context
+import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -33,12 +34,12 @@ class PopupConfirm(context : Context) {
 
         var todayCalendar: Calendar = Calendar.getInstance()
         val cal = todayCalendar
-        cal.add(Calendar.MONTH, addMonth)
-        cal.add(Calendar.DAY_OF_WEEK, dayCount)
 
-        val month = cal.get(Calendar.MONTH) + 1
-        val day = cal.get(Calendar.DATE)
-        val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
+        cal.set(Calendar.DAY_OF_MONTH , dayCount);
+        Log.i("@@ ", "before : " + cal.time.toString());
+        cal.add(Calendar.MONTH, addMonth)
+
+        Log.i("@@ ", "after : " + cal.time.toString());
 
         val df: DateFormat = SimpleDateFormat("EEE-MMMM-d")
         val dayOfWeekStr = df.format(cal.time).split("-")[0]

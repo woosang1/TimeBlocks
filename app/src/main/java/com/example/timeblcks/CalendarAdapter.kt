@@ -15,14 +15,18 @@ class CalendarAdapter(context : Context, addMonth : Int): RecyclerView.Adapter<C
     var addMonth = addMonth
     var dayCount = 1
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder =
         CalendarViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.activity_calendar_item, parent, false))
 
     override fun getItemCount(): Int = 35
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
+        var calendar  = Calendar.getInstance()
+        calendar.add(Calendar.MONTH,addMonth)
+
         val startDay = startDay(addMonth)
-        if (startDay <= position){
+        if (startDay <= position && dayCount <= calendar.getActualMaximum(Calendar.DAY_OF_MONTH)){
             holder.day.text = dayCount.toString()
             dayCount++
         }
@@ -30,7 +34,10 @@ class CalendarAdapter(context : Context, addMonth : Int): RecyclerView.Adapter<C
             holder.day.text = ""
         }
 
+
+
         holder.day.setOnClickListener {
+            Log.i("@@" , "calendarAdapter click : " + position)
             val popup = PopupConfirm(context = context)
             popup.start(addMonth, Integer.parseInt(holder.day.text.toString()))
         }
