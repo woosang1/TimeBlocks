@@ -72,4 +72,14 @@ class ViewPagerAdapter(context : Context): RecyclerView.Adapter<ViewPagerAdapter
 //            photoView.imageBitmap = image //anko 라이브러리 사용
 //        }
     }
+
+    public fun getCalendarAdapter() : CalendarAdapter? {
+        if (calendarAdapter != null){
+            return calendarAdapter
+        }
+        else{
+            return null
+        }
+    }
+
 }

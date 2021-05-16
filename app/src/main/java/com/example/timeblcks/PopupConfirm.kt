@@ -2,20 +2,25 @@ package com.example.timeblcks
 
 import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PopupConfirm(context : Context) {
+class PopupConfirm(context : Context, calendarAdapter: CalendarAdapter) {
+    private val context = context
+    private val calendarAdapter = calendarAdapter
     private val dlg = Dialog(context)
     private lateinit var dayOfWeekTextView : TextView
     private lateinit var dayTextView: TextView
     private lateinit var monthTextView: TextView
     private lateinit var btnOK : Button
+    private lateinit var memoText : EditText
 
     fun start(addMonth : Int, dayCount : Int) {
 
@@ -25,12 +30,9 @@ class PopupConfirm(context : Context) {
         dayOfWeekTextView = dlg.findViewById<TextView>(R.id.tv_popup_day_of_week)
         dayTextView = dlg.findViewById<TextView>(R.id.tv_popup_day)
         monthTextView = dlg.findViewById<TextView>(R.id.tv_popup_month)
+        memoText = dlg.findViewById<EditText>(R.id.et_memo_text)
 
         btnOK = dlg.findViewById(R.id.b_confirm)
-        btnOK.setOnClickListener {
-
-            dlg.dismiss()
-        }
 
         var todayCalendar: Calendar = Calendar.getInstance()
         val cal = todayCalendar
@@ -51,6 +53,23 @@ class PopupConfirm(context : Context) {
         monthTextView.text = monthStr
 
         dlg.show()
+
+        btnOK.setOnClickListener {
+            val df2: DateFormat = SimpleDateFormat("yyyyMMdd")
+            saveData(df2.format(cal.time), memoText.text.toString());
+            dlg.dismiss()
+            if (calendarAdapter != null){
+                calendarAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun saveData(date : String, text : String){
+        Log.i("@@ ", "memo  date : " + date + "text : " + text)
+        val prefs: SharedPreferences = context.getSharedPreferences("Memo", Context.MODE_PRIVATE)
+        val edit = prefs.edit()
+        edit.putString(date , text)
+        edit.apply()
     }
 
 }

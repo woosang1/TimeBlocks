@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 getToday(position)
+                viewPagerAdapter.getCalendarAdapter()?.changeMonth(position)
+                viewPagerAdapter.notifyDataSetChanged()
             }
         })
 
@@ -45,5 +47,12 @@ class MainActivity : AppCompatActivity() {
 
         mouthTextView.text = month.toString()
         yearTextView.text = year.toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (viewPagerAdapter != null){
+            viewPagerAdapter.notifyDataSetChanged()
+        }
     }
 }
