@@ -12,9 +12,10 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PopupConfirm(context : Context, calendarAdapter: CalendarAdapter) {
+class PopupConfirm(context : Context, calendarAdapter: CalendarAdapter, position : Int) {
     private val context = context
     private val calendarAdapter = calendarAdapter
+    private val currentPosition  = position
     private val dlg = Dialog(context)
     private lateinit var dayOfWeekTextView : TextView
     private lateinit var dayTextView: TextView
@@ -59,7 +60,7 @@ class PopupConfirm(context : Context, calendarAdapter: CalendarAdapter) {
             saveData(df2.format(cal.time), memoText.text.toString());
             dlg.dismiss()
             if (calendarAdapter != null){
-                calendarAdapter.notifyDataSetChanged()
+                calendarAdapter.notifyItemChanged(currentPosition)
             }
         }
     }

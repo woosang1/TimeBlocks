@@ -59,7 +59,7 @@ class CalendarAdapter(context : Context, addMonth : Int): RecyclerView.Adapter<C
 
         holder.day.setOnClickListener {
             Log.i("@@" , "calendarAdapter click : " + position)
-            val popup = PopupConfirm(context = context , this)
+            val popup = PopupConfirm(context = context , this , position)
             popup.start(addMonth, Integer.parseInt(holder.day.text.toString()))
         }
 
